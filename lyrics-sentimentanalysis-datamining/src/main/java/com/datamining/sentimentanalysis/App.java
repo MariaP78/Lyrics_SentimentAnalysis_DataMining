@@ -2,6 +2,7 @@ package com.datamining.sentimentanalysis;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,6 +65,28 @@ public class App
                     System.out.println("An error occurred.");
                     e.printStackTrace();
                 }
+        }
+
+        ArrayList<Double> relevanceScores = new ArrayList<>();
+        for (Song rankedSong : rankedSongsList) {
+            relevanceScores.add(rankedSong.getRelevanceScore());
+        }
+
+        double dcg = DCGCalculator.calculateDCG(relevanceScores);
+        System.out.println("DCG: " + dcg);
+
+        double idcg = IDCGCalculator.calculateIDCG(relevanceScores);
+        System.out.println("IDCG: " + idcg);
+
+        // Calculate NDCG
+        double ndcg = NDCGCalculator.calculateNDCG(dcg, idcg);
+        System.out.println("NDCG: " + ndcg);
+
+        // Check if the ranking is perfect
+        if (NDCGCalculator.isPerfectRanking(ndcg)) {
+            System.out.println("The ranking is perfect!");
+        } else {
+            System.out.println("The ranking is not perfect.");
         }
     }
 }
