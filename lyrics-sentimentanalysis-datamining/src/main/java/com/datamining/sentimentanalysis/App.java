@@ -15,7 +15,7 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "This is the main class!" );
-        String filePath = "../Lyrics_SentimentAnalysis_DataMining//Dataset_Songs_Lyrics.txt";
+        String filePath = "../Lyrics_SentimentAnalysis_DataMining/Dataset_Songs_Lyrics.txt";
         List<String> songs = LyricsReader.readLyrics(filePath);
 
         // use the SentimentAnalyzer class to analyze the sentiment of each song
@@ -34,7 +34,7 @@ public class App
         Collections.sort(rankedSongsList);
 
         // assign relevance scores to the songs linearly
-        // RelevanceScorer.assignRelevanceScoresLinearly(rankedSongsList);
+        //RelevanceScorer.assignRelevanceScoresLinearly(rankedSongsList);
 
         // assign relevance scores to the songs logarithmically
         RelevanceScorer.assignLogarithmicRelevanceScores(rankedSongsList);
@@ -67,14 +67,17 @@ public class App
                 }
         }
 
+        // Calculate Relevance Scores
         ArrayList<Double> relevanceScores = new ArrayList<>();
         for (Song rankedSong : rankedSongsList) {
             relevanceScores.add(rankedSong.getRelevanceScore());
         }
 
+        // Calculate DCG
         double dcg = DCGCalculator.calculateDCG(relevanceScores);
         System.out.println("DCG: " + dcg);
 
+        // Calculate IDCG
         double idcg = IDCGCalculator.calculateIDCG(relevanceScores);
         System.out.println("IDCG: " + idcg);
 

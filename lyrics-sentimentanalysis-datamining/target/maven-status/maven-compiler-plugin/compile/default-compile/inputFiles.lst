@@ -1,5 +1,10 @@
+/Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/NDCGCalculator.java
+/Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/IDCGCalculator.java
 /Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/RelevanceScorer.java
+/Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/v1/LyricsPreprocessing.java
+/Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/v1/LuceneIndexing.java
 /Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/LyricsReader.java
+/Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/DCGCalculator.java
 /Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/SentimentAnalyzer.java
 /Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/App.java
 /Users/mariapapuc/Maria's Folder/Master/An2_Sem1/DataMining/Proiect/Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/Song.java
