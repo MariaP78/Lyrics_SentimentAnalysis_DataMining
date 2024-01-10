@@ -6,10 +6,8 @@ import java.util.Map.Entry;
 
 /**
  * Description:
- *  Naive Bayes Classifier used
- *  to classify whether or not a
- *  given string has a positive or
- *  negative connotation
+ *  Naive Bayes Classifier
+ *  used to classify each song out of the input dataset
  */
 
 
@@ -35,6 +33,9 @@ public class NaiveBayes {
     //path to data set
     private String path;
 
+    //path to output file
+    private static final String outputPath = "output.txt";
+
     //centralize the option to update the data set (primarily used for testing,
     //best to leave this alone)
     private boolean updatePermission;
@@ -49,7 +50,8 @@ public class NaiveBayes {
 
     //initialize data and data structures
     public NaiveBayes(String Path, boolean learn, boolean critique, boolean stem, boolean update) {
-        String[] removeWords = {"a", "about", "above", "across", "after", "again", "against", "all", "almost", "alone", "along", "already", "also", "although", "always", "among", "an", "and", "another", "any", "anybody", "anyone", "anything", "anywhere", "are", "area", "areas", "around", "as", "ask", "asked", "asking", "asks", "at", "away", "b", "back", "backed", "backing", "backs", "be", "became", "because", "become", "becomes", "been", "before", "began", "behind", "being", "beings", "best", "better", "between", "big", "both", "but", "by", "c", "came", "can", "cannot", "case", "cases", "certain", "certainly", "clear", "clearly", "come", "could", "d", "did", "differ", "different", "differently", "do", "does", "done", "down", "down", "downed", "downing", "downs", "during", "e", "each", "early", "either", "end", "ended", "ending", "ends", "enough", "even", "evenly", "ever", "every", "everybody", "everyone", "everything", "everywhere", "f", "face", "faces", "fact", "facts", "far", "felt", "few", "find", "finds", "first", "for", "four", "from", "full", "fully", "further", "furthered", "furthering", "furthers", "g", "gave", "general", "generally", "get", "gets", "give", "given", "gives", "go", "going", "good", "goods", "got", "great", "greater", "greatest", "group", "grouped", "grouping", "groups", "h", "had", "has", "have", "having", "he", "her", "here", "herself", "high", "high", "high", "higher", "highest", "him", "himself", "his", "how", "however", "i", "if", "important", "in", "interest", "interested", "interesting", "interests", "into", "is", "it", "its", "itself", "j", "just", "k", "keep", "keeps", "kind", "knew", "know", "known", "knows", "l", "large", "largely", "last", "later", "latest", "least", "less", "let", "lets", "like", "likely", "long", "longer", "longest", "m", "made", "make", "making", "man", "many", "may", "me", "member", "members", "men", "might", "more", "most", "mostly", "mr", "mrs", "much", "must", "my", "myself", "n", "necessary", "need", "needed", "needing", "needs", "never", "new", "new", "newer", "newest", "next", "no", "nobody", "non", "noone", "not", "nothing", "now", "nowhere", "number", "numbers", "o", "of", "off", "often", "old", "older", "oldest", "on", "once", "one", "only", "open", "opened", "opening", "opens", "or", "order", "ordered", "ordering", "orders", "other", "others", "our", "out", "over", "p", "part", "parted", "parting", "parts", "per", "perhaps", "place", "places", "point", "pointed", "pointing", "points", "possible", "present", "presented", "presenting", "presents", "problem", "problems", "put", "puts", "q", "quite", "r", "rather", "really", "right", "right", "room", "rooms", "s", "said", "same", "saw", "say", "says", "second", "seconds", "see", "seem", "seemed", "seeming", "seems", "sees", "several", "shall", "she", "should", "show", "showed", "showing", "shows", "side", "sides", "since", "small", "smaller", "smallest", "so", "some", "somebody", "someone", "something", "somewhere", "state", "states", "still", "still", "such", "sure", "t", "take", "taken", "than", "that", "the", "their", "them", "then", "there", "therefore", "these", "they", "thing", "things", "think", "thinks", "this", "those", "though", "thought", "thoughts", "three", "through", "thus", "to", "today", "together", "too", "took", "toward", "turn", "turned", "turning", "turns", "two", "u", "under", "until", "up", "upon", "us", "use", "used", "uses", "v", "very", "w", "want", "wanted", "wanting", "wants", "was", "way", "ways", "we", "well", "wells", "went", "were", "what", "when", "where", "whether", "which", "while", "who", "whole", "whose", "why", "will", "with", "within", "without", "work", "worked", "working", "works", "would", "x", "y", "year", "years", "yet", "you", "young", "younger", "youngest", "your", "yours", "z"};
+        // String[] removeWords = {"about", "above", "across", "after", "again", "against", "all", "almost", "alone", "along", "already", "also", "although", "always", "among", "an", "and", "another", "any", "anybody", "anyone", "anything", "anywhere", "are", "area", "areas", "around", "as", "ask", "asked", "asking", "asks", "at", "away", "b", "back", "backed", "backing", "backs", "be", "became", "because", "become", "becomes", "been", "before", "began", "behind", "being", "beings", "best", "better", "between", "big", "both", "but", "by", "c", "came", "can", "cannot", "case", "cases", "certain", "certainly", "clear", "clearly", "come", "could", "d", "did", "differ", "different", "differently", "do", "does", "done", "down", "down", "downed", "downing", "downs", "during", "e", "each", "early", "either", "end", "ended", "ending", "ends", "enough", "even", "evenly", "ever", "every", "everybody", "everyone", "everything", "everywhere", "f", "face", "faces", "fact", "facts", "far", "felt", "few", "find", "finds", "first", "for", "four", "from", "full", "fully", "further", "furthered", "furthering", "furthers", "g", "gave", "general", "generally", "get", "gets", "give", "given", "gives", "go", "going", "good", "goods", "got", "great", "greater", "greatest", "group", "grouped", "grouping", "groups", "h", "had", "has", "have", "having", "he", "her", "here", "herself", "high", "high", "high", "higher", "highest", "him", "himself", "his", "how", "however", "i", "if", "important", "in", "interest", "interested", "interesting", "interests", "into", "is", "it", "its", "itself", "j", "just", "k", "keep", "keeps", "kind", "knew", "know", "known", "knows", "l", "large", "largely", "last", "later", "latest", "least", "less", "let", "lets", "like", "likely", "long", "longer", "longest", "m", "made", "make", "making", "man", "many", "may", "me", "member", "members", "men", "might", "more", "most", "mostly", "mr", "mrs", "much", "must", "my", "myself", "n", "necessary", "need", "needed", "needing", "needs", "never", "new", "new", "newer", "newest", "next", "no", "nobody", "non", "noone", "not", "nothing", "now", "nowhere", "number", "numbers", "o", "of", "off", "often", "old", "older", "oldest", "on", "once", "one", "only", "open", "opened", "opening", "opens", "or", "order", "ordered", "ordering", "orders", "other", "others", "our", "out", "over", "p", "part", "parted", "parting", "parts", "per", "perhaps", "place", "places", "point", "pointed", "pointing", "points", "possible", "present", "presented", "presenting", "presents", "problem", "problems", "put", "puts", "q", "quite", "r", "rather", "really", "right", "right", "room", "rooms", "s", "said", "same", "saw", "say", "says", "second", "seconds", "see", "seem", "seemed", "seeming", "seems", "sees", "several", "shall", "she", "should", "show", "showed", "showing", "shows", "side", "sides", "since", "small", "smaller", "smallest", "so", "some", "somebody", "someone", "something", "somewhere", "state", "states", "still", "still", "such", "sure", "t", "take", "taken", "than", "that", "the", "their", "them", "then", "there", "therefore", "these", "they", "thing", "things", "think", "thinks", "this", "those", "though", "thought", "thoughts", "three", "through", "thus", "to", "today", "together", "too", "took", "toward", "turn", "turned", "turning", "turns", "two", "u", "under", "until", "up", "upon", "us", "use", "used", "uses", "v", "very", "w", "want", "wanted", "wanting", "wants", "was", "way", "ways", "we", "well", "wells", "went", "were", "what", "when", "where", "whether", "which", "while", "who", "whole", "whose", "why", "will", "with", "within", "without", "work", "worked", "working", "works", "would", "x", "y", "year", "years", "yet", "you", "young", "younger", "youngest", "your", "yours", "z"};
+        String[] removeWords = {"a","the","an"};
         stopWords = new HashSet<>(Arrays.asList(removeWords));
         totalWordCount = 0;
         WordCountPerClass = new HashMap<>();
@@ -133,7 +135,7 @@ public class NaiveBayes {
                 int classification = Integer.parseInt(String.valueOf(line.charAt(line.length() - 1)));
 
                 //remove stop words, symbols, and spaces
-                String[] splitWords = removeStopWords(line.replaceAll("[^a-zA-Z ]", " ").trim().toLowerCase().split(" "));
+                String[] splitWords = removeStopWords(line.replaceAll("[^a-zA-Z ]", " ").trim().split(" "));
                 List<String> words = Arrays.asList(splitWords);
 
                 //create a new Set of processed strings
@@ -255,14 +257,34 @@ public class NaiveBayes {
 
     //adds examples seen to our data set, so that we never lose our progress
     private void updateDataSet(int classification, String[] words) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(path, true));
-
-        //write classification for training purposes
-        bw.write("" + classification + "\t");
+        BufferedWriter bw = new BufferedWriter(new FileWriter(outputPath, true));
+        String classificationName= "";
 
         //add words to file
-        for (String word : words)
+        for (String word : words) {
             bw.write(word + " ");
+        }
+
+        if (classification == -5){
+            classificationName = "End of the Song";
+        }
+        else if (classification == -1) {
+            classificationName = "Very negative";
+        }
+        else if (classification == 0) {
+            classificationName = "Negative";
+        }
+        else if (classification == 1) {
+            classificationName = "Neutral";
+        }
+        else if (classification == 2) {
+            classificationName = "Positive";
+        }
+        else if (classification == 3) {
+            classificationName = "Very positive";
+        };
+
+        bw.write("\n ~~~~~~~~~~~~~~~~~~~ SONG SENTIMENT ~~~~~~~~~~~~~~~~~~~ " + classificationName + " " + classification + "\t");
 
         //create new line and close file
         bw.newLine();
@@ -282,7 +304,7 @@ public class NaiveBayes {
             while ((line = reader.readLine()) != null)
             {
                 //classify a line of text
-                int n = analyze(line.replaceAll("[^a-zA-Z ]", " ").trim().toLowerCase());
+                int n = analyze(line.replaceAll("[^a-zA-Z ]", " ").trim());
 
                 //add classification to map to return to user
                 classifications.put(line, n);
@@ -302,7 +324,6 @@ public class NaiveBayes {
         String line;
         Double correct = 0.0;
         Double total = 0.0;
-        int i = 1;
 
         try {
             //read in data from file
@@ -312,7 +333,7 @@ public class NaiveBayes {
                 int classification = Integer.parseInt(String.valueOf(line.charAt(0)));
 
                 //remove stop words, symbols, and spaces
-                int classified = analyze(line.replaceAll("[^a-zA-Z ]", " ").trim().toLowerCase());
+                int classified = analyze(line.replaceAll("[^a-zA-Z ]", " ").trim());
 
                 if (classified == classification)
                     correct++;
@@ -332,7 +353,6 @@ public class NaiveBayes {
                     }
                 }
                 total++;
-                i++;
             }
 
             reader.close();
@@ -349,7 +369,7 @@ public class NaiveBayes {
         if (str.intern().trim() == "") return 1;
 
         //remove stop words, symbols, and spaces
-        String[] splitWords = removeStopWords(str.trim().replaceAll("[^a-zA-Z ]", " ").toLowerCase().split(" "));
+        String[] splitWords = removeStopWords(str.trim().replaceAll("[^a-zA-Z ]", " ").split(" "));
 
         //probability of each word occurring for each class
         //Map<class, Map<word, probability>>
@@ -380,7 +400,7 @@ public class NaiveBayes {
                     if (probabilities.get(entry.getKey()).get(word) != null)
                         probabilities.get(entry.getKey()).put(word, (2 * probabilities.get(entry.getKey()).get(word)));
 
-                        //if the word does not exits, compute its probability
+                        //if the word does not exist, compute its probability
                     else {
                         //probability = probability of seeing word in this class / word count in this class
                         Double prob = (double) (((entry.getValue().get(word) == null) ? 1 : entry.getValue().get(word)) / ((WordCountPerClass.get(word) == null) ? 1 : WordCountPerClass.get(word)));
