@@ -1,0 +1,6 @@
+Song: Shattered Lights Sway to the rhythm; let the moment be your guide Celebrate the night as if there's no sunrise to meet In the rhythm of the night, we find freedom Surrender to the beat, and let the music take control The city's alive with the sound of the beat Let the DJ be the architect of our escapade With every pulse, our spirits are unified Tonight, we're the kings and queens of the dance floor,
+	Sentiment: Negative
+	Value: 0
+Song: Song 2,
+	Sentiment: Positive
+	Value: 2
