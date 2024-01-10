@@ -34,7 +34,7 @@ public class NaiveBayes {
     private String path;
 
     //path to output file
-    private static final String outputPath = "output.txt";
+    private static final String outputPath = "../Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/output.txt";
 
     //centralize the option to update the data set (primarily used for testing,
     //best to leave this alone)
