@@ -1,5 +1,4 @@
 import re
-
 import nltk
 import pandas as pd
 from nltk.stem.porter import PorterStemmer
@@ -72,7 +71,7 @@ def train_model(raw_data, test_data: list):
     mnb = MultinomialNB()
     mnb.fit(X_train, y_train)
     response = []
-    with open("output.txt", "w+") as file1:
+    with open("../Lyrics_SentimentAnalysis_DataMining/python_endpoint/output.txt", "w+") as file1:
         for song in test_data:
             file1.writelines(f'Song: {song},'
                         f'\n\tSentiment: {SENTIMENT_ENUM[mnb.predict(cv.transform([song]))[0]]}'
@@ -91,7 +90,7 @@ def train_model(raw_data, test_data: list):
 
 
 def run_model(test_data):
-    data = pd.read_csv('training_set.csv')
+    data = pd.read_csv('../Lyrics_SentimentAnalysis_DataMining/python_endpoint/training_set.csv')
     data = process_data(data)
     response = train_model(data, test_data)
     return response
