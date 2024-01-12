@@ -6,15 +6,36 @@ import "./LyricsAnalyzer.css";
 const LyricsAnalyzer = () => {
   const [lyrics, setLyrics] = useState("");
   const [sentiment, setSentiment] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const analyzeSentiment = async () => {
     try {
-      // Replace 'YOUR_BACKEND_API_ENDPOINT' with the actual endpoint
-      // const response = await axios.post('YOUR_BACKEND_API_ENDPOINT', { lyrics });
-      // setSentiment(response.data.sentiment);
+      setLoading(true);
+      const response = await axios.post(
+        "http://localhost:8080/sentiment-analysis",
+        { lyrics }
+      );
+      setSentiment(response.data.sentiment);
       console.log("Sentiment endpoint analyzed");
     } catch (error) {
       console.error("Error analyzing sentiment:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getSentimentColor = (sentiment) => {
+    switch (sentiment) {
+      case "Very positive":
+        return "green";
+      case "Positive":
+        return "#74bc11";
+      case "Neutral":
+        return "#4d8feb";
+      case "Negative":
+        return "#ff6464";
+      case "Very negative":
+        return "red";
+      default:
+        return "black";
     }
   };
 
@@ -30,20 +51,27 @@ const LyricsAnalyzer = () => {
           onChange={(e) => setLyrics(e.target.value)}
         ></textarea>
 
-        <button className="analyze-button" onClick={analyzeSentiment}>
+        <button
+          className={`analyze-button${loading ? " disabled-button" : ""}`}
+          onClick={analyzeSentiment}
+          disabled={loading}
+        >
           Analyze Sentiment
         </button>
 
         {sentiment && (
           <div className="sentiment-result">
             <p className="result-label">Sentiment:</p>
-            <p
-              className={`result-text ${
-                sentiment === "positive" ? "positive" : "negative"
-              }`}
-            >
-              {sentiment.toUpperCase()}
-            </p>
+            {loading ? (
+              <p className={`result-text`}>Loading...</p>
+            ) : (
+              <p
+                style={{ color: getSentimentColor(sentiment) }}
+                className={`result-text`}
+              >
+                {sentiment.toUpperCase()}
+              </p>
+            )}
           </div>
         )}
       </div>
