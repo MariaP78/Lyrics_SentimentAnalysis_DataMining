@@ -2,6 +2,12 @@ package com.datamining.sentimentanalysis;
 
 import java.util.List;
 
+/**
+ * The Relevance Scorer Class
+ * 
+ * Used for assigning relevance scores to the songs
+ *
+ */
 public class RelevanceScorer {
 
     // LINEAR SCORING
@@ -21,7 +27,7 @@ public class RelevanceScorer {
         // and decreases logarithmically for each subsequent song
         final double baseLogRelevance = Math.log(rankedSongs.size());
         for (int i = 0; i < rankedSongs.size(); i++) {
-            // Using logarithmic scale, ensuring that the top song has the highest score
+            // Using logarithmic scale, we ensure that the top song has the highest score
             double relevanceScore = baseLogRelevance - Math.log(i + 1);
             rankedSongs.get(i).setRelevanceScore(Double.parseDouble(String.format("%.2f", relevanceScore)));
         }

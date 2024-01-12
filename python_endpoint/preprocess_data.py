@@ -7,13 +7,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB
 from sklearn.preprocessing import LabelEncoder
 
+# sentiment scores
 SENTIMENT_ENUM = {-1: 'Very negative',
                   0: 'Negative',
                   1: 'Neutral',
                   2: 'Positive',
                   3: 'Very positive'}
 
-
+# remove HTML tags, URLs, non-alphanumeric characters
 def remove_tags(string):
     removelist = ""
     result = re.sub('', '', string)  # remove HTML tags
@@ -22,7 +23,7 @@ def remove_tags(string):
     result = result.lower()
     return result
 
-
+# lemmatize (reduce words to their root form) the text
 def lemmatize_text(text):
     w_tokenizer = nltk.tokenize.WhitespaceTokenizer()
     lemmatizer = nltk.stem.WordNetLemmatizer()
@@ -31,7 +32,7 @@ def lemmatize_text(text):
         st = st + lemmatizer.lemmatize(w) + " "
     return st
 
-
+# stem (reduce words to their root form) the text
 def stem_words(text):
     ps = PorterStemmer()
     stem_list = [ps.stem(word) for word in text.split()]
@@ -39,7 +40,7 @@ def stem_words(text):
 
     return text
 
-
+# process the data
 def process_data(raw_data):
     nltk.download('stopwords')
     nltk.download('wordnet')
@@ -53,7 +54,7 @@ def process_data(raw_data):
     raw_data['Song'] = raw_data['Song'].apply(stem_words)
     return raw_data
 
-
+# encode the labels
 def encode_labels(raw_data):
     reviews = raw_data['Song'].values
     labels = raw_data['Sentiment'].values
@@ -61,7 +62,7 @@ def encode_labels(raw_data):
     encoded_labels = encoder.fit_transform(labels)
     return reviews, encoded_labels
 
-
+# train the model using Multinomial Naive Bayes
 def train_model(raw_data, test_data: list):
     cv = CountVectorizer(max_features=800, stop_words='english')
     # vectorizing words and storing in variable X(predictor)
@@ -81,14 +82,8 @@ def train_model(raw_data, test_data: list):
                              "Value": str(mnb.predict(cv.transform([song]))[0])})
 
     return response
-    # accuracy scores
 
-    # y_pred_mnb = mnb.predict(X_test)
-    # print("Gaussian", accuracy_score(y_test, y_pred_gnb))
-    # print("Multinomial", accuracy_score(y_test, y_pred_mnb))
-    # print("Bernoulli", accuracy_score(y_test, y_pred_bnb))
-
-
+# run the model
 def run_model(test_data):
     data = pd.read_csv('../Lyrics_SentimentAnalysis_DataMining/python_endpoint/training_set.csv')
     data = process_data(data)

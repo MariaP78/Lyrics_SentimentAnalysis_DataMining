@@ -5,8 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The Sentiment Analyzer Class
+ * 
+ * analyzes the sentiment of each song by using the Stanford CoreNLP library written in Java
+ */
 public class SentimentAnalyzer {
+
+    // list of ranked songs
     public List<Song> rankedSongs = new ArrayList<>();
+
     // Analyzes the sentiment of each song in the list
     public void analyzeSentiment(List<String> songs) {
         // Create a StanfordCoreNLP object with the properties for sentiment analysis
@@ -14,9 +22,8 @@ public class SentimentAnalyzer {
         props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse, sentiment");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
-        // ranking the songs based on their sentiment from -1 to 3
-        double rank = 0.0;
-        
+        // ranking the songs based on their sentiment from -1.0 to 3.0
+        double rank = 0.0; // initialize the rank to 0.0
 
         // Iterate over the songs in the list
         for (String song : songs) {
@@ -47,8 +54,7 @@ public class SentimentAnalyzer {
                     }
                 rankedSongs.add(new Song(sentence.toString(), rank));
                 
-                // System.out.println(sentence + " \n~~~~~~~~~~~~~~~~~~~ SONG SENTIMENT ~~~~~~~~~~~~~~~~~~~ " + sentiment + "\n");
-                // writing everything to a file without overwriting
+                // writing everything to a file without overwriting its previous content
                 try {
                     FileWriter myWriter = new FileWriter("LyricsSentimentAnalysis.txt", true);
                     myWriter.write(sentence + " \n~~~~~~~~~~~~~~~~~~~ SONG SENTIMENT ~~~~~~~~~~~~~~~~~~~ " + sentiment + " " + rank + "\n");
@@ -65,6 +71,8 @@ public class SentimentAnalyzer {
     }
 
     public static void main(String[] args) {
+        // Tested sentiment analysis on a single song
+        
         // Create a StanfordCoreNLP object with the properties for sentiment analysis
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse, sentiment");

@@ -1,8 +1,12 @@
 package com.datamining.sentimentanalysis;
 
+/**
+ * The NDCG (Normalized Discounted Cumulative Gain) Calculator Class
+ *
+ */
 public class NDCGCalculator {
 
-    // Function to calculate NDCG
+    // Function to calculate NDCG (Normalized Discounted Cumulative Gain)
     public static double calculateNDCG(double dcg, double idcg) {
         // Calculate NDCG by dividing DCG by IDCG
         if (idcg == 0.0) {
@@ -11,9 +15,9 @@ public class NDCGCalculator {
         return dcg / idcg;
     }
 
-    // Function to check if the ranking is perfect
+    // Function to check if the ranking is perfect or not
     public static boolean isPerfectRanking(double ndcg) {
-        double epsilon = 1e-6; // A small value to handle precision errors
+        double epsilon = 1e-6; // used a small value to handle precision errors
 
         // Check if NDCG is close enough to 1.0
         return Math.abs(ndcg - 1.0) < epsilon;

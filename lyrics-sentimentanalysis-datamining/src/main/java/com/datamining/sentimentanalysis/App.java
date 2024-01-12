@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "This is the main class!" );
+    public static void main( String[] args ) {
+        
+        // read the lyrics of the songs from our dataset
         String filePath = "../Lyrics_SentimentAnalysis_DataMining/Dataset_Songs_Lyrics.txt";
         List<String> songs = LyricsReader.readLyrics(filePath);
 
@@ -22,26 +22,27 @@ public class App
         SentimentAnalyzer sentimentAnalyzer = new SentimentAnalyzer();
         sentimentAnalyzer.analyzeSentiment(songs);
 
-        // SONGS RANKING based on their sentiment from -1 to 3
+        // SONGS RANKING based on their sentiment from -1 to 3 (sentiment score)
         // Very Negative = -1.0
         // Negative = 0.0
         // Neutral = 1.0
         // Positive = 2.0
         // Very Positive = 3.0
 
+        // get the ranked songs list
         List<Song> rankedSongsList = sentimentAnalyzer.rankedSongs;
+
         // sort the songs in descending order based on their sentiment score
         Collections.sort(rankedSongsList);
 
-        // assign relevance scores to the songs linearly
+        // assign relevance scores to the songs -- LINEAR RELEVANCE
         //RelevanceScorer.assignRelevanceScoresLinearly(rankedSongsList);
 
-        // assign relevance scores to the songs logarithmically
+        // assign relevance scores to the songs -- LOGARITHMIC RELEVANCE
         RelevanceScorer.assignLogarithmicRelevanceScores(rankedSongsList);
 
-        // // Now songs are sorted by sentiment score and each song has a relevance score
+        // // Now songs are sorted by sentiment score and each song has a relevance score -- LINEAR RELEVANCE SCORE
         // for (Song rankedSong : rankedSongsList) {
-        //     // System.out.println(rankedSong);
         //     try {
         //             FileWriter myWriter = new FileWriter("RankingAndLinearRelevance.txt", true);
         //             myWriter.write(rankedSong + "\n");
@@ -53,9 +54,8 @@ public class App
         //         }
         // }
 
-        // Now songs are sorted by sentiment score and each song has a relevance score
+        // Now songs are sorted by sentiment score and each song has a relevance score -- LOGARITHMIC RELEVANCE SCORE
         for (Song rankedSong : rankedSongsList) {
-            // System.out.println(rankedSong);
             try {
                     FileWriter myWriter = new FileWriter("RankingAndLogarithmicRelevance.txt", true);
                     myWriter.write(rankedSong + "\n");
@@ -73,23 +73,23 @@ public class App
             relevanceScores.add(rankedSong.getRelevanceScore());
         }
 
-        // Calculate DCG
+        // Calculate DCG (Discounted Cumulative Gain)
         double dcg = DCGCalculator.calculateDCG(relevanceScores);
-        System.out.println("DCG: " + dcg);
+        System.out.println("The DCG value is: " + dcg);
 
-        // Calculate IDCG
+        // Calculate IDCG (Ideal Discounted Cumulative Gain)
         double idcg = IDCGCalculator.calculateIDCG(relevanceScores);
-        System.out.println("IDCG: " + idcg);
+        System.out.println("The IDCG value is: " + idcg);
 
-        // Calculate NDCG
+        // Calculate NDCG (Normalized Discounted Cumulative Gain)
         double ndcg = NDCGCalculator.calculateNDCG(dcg, idcg);
-        System.out.println("NDCG: " + ndcg);
+        System.out.println("The NDCG value is: " + ndcg);
 
-        // Check if the ranking is perfect
+        // Check if the ranking is perfect or not
         if (NDCGCalculator.isPerfectRanking(ndcg)) {
             System.out.println("The ranking is perfect!");
         } else {
-            System.out.println("The ranking is not perfect.");
+            System.out.println("The ranking is not perfect...");
         }
     }
 }

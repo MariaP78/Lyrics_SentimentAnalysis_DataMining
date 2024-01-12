@@ -3,15 +3,21 @@ package com.datamining.sentimentanalysis;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The IDCG (Ideal Discounted Cumulative Gain) Calculator Class
+ *
+ */
 public class IDCGCalculator {
 
-    // Function to calculate IDCG
+    // Function to calculate IDCG (Ideal Discounted Cumulative Gain)
     public static double calculateIDCG(ArrayList<Double> relevanceScores) {
         ArrayList<Double> sortedScores = new ArrayList<>(relevanceScores);
         Collections.sort(sortedScores, Collections.reverseOrder()); // Sort in descending order
 
         // Calculate IDCG using the same formula as DCG
         double idcg = 0.0;
+        // calculate the number of songs by taking the minimum between 
+        // the number of relevance scores and the number of sorted scores
         int numSongs = Math.min(relevanceScores.size(), sortedScores.size());
 
         for (int i = 0; i < numSongs; i++) {
@@ -22,18 +28,4 @@ public class IDCGCalculator {
 
         return idcg;
     }
-
-//    public static void main(String[] args) {
-//        // Example relevance scores
-//        ArrayList<Double> relevanceScores = new ArrayList<>();
-//        relevanceScores.add(4.5); // Song 1
-//        relevanceScores.add(3.8); // Song 2
-//        relevanceScores.add(2.1); // Song 3
-//        relevanceScores.add(1.9); // Song 4
-//        relevanceScores.add(1.5); // Song 5
-//
-//        // Calculate IDCG for the example scores
-//        double idcg = calculateIDCG(relevanceScores);
-//        System.out.println("IDCG: " + idcg);
-//    }
 }

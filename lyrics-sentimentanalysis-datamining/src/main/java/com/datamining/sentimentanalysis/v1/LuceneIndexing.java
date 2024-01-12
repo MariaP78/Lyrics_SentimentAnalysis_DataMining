@@ -18,8 +18,15 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import java.nio.file.Paths;
 
+/**
+ * The Lucene Indexing Class
+ * 
+ * Used for indexing the lyrics
+ *
+ */
 public class LuceneIndexing {
     public static void main(String[] args) {
+        // Path to the index directory
         String indexPath = "../Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/v1/index";
         try {
             // Set up Lucene indexer
