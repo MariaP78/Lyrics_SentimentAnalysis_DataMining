@@ -2,6 +2,7 @@ package com.datamining.sentimentanalysis;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * The IDCG (Ideal Discounted Cumulative Gain) Calculator Class
@@ -10,8 +11,8 @@ import java.util.Collections;
 public class IDCGCalculator {
 
     // Function to calculate IDCG (Ideal Discounted Cumulative Gain)
-    public static double calculateIDCG(ArrayList<Double> relevanceScores) {
-        ArrayList<Double> sortedScores = new ArrayList<>(relevanceScores);
+    public static double calculateIDCG(List<Double> relevanceScores) {
+        List<Double> sortedScores = new ArrayList<>(relevanceScores);
         Collections.sort(sortedScores, Collections.reverseOrder()); // Sort in descending order
 
         // Calculate IDCG using the same formula as DCG

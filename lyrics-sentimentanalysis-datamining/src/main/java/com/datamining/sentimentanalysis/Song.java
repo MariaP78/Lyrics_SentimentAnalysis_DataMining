@@ -18,13 +18,24 @@ public class Song implements Comparable<Song>{
         this.relevanceScore = 0.0;
     }
 
-    // Getters and Setters
+    public Song() {
+
+    }
+
     public String getLyrics() {
         return lyrics;
     }
 
+    public void setLyrics(String lyrics) {
+        this.lyrics = lyrics;
+    }
+
     public Double getSentimentScore() {
         return sentimentScore;
+    }
+
+    public void setSentimentScore(Double sentimentScore) {
+        this.sentimentScore = sentimentScore;
     }
 
     public Double getRelevanceScore() {

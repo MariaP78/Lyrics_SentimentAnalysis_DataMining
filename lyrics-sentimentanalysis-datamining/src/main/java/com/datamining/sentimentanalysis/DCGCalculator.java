@@ -1,6 +1,7 @@
 package com.datamining.sentimentanalysis;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The DCG (Discounted Cumulative Gain) Calculator Class
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class DCGCalculator {
 
     // Function to calculate the DCG (Discounted Cumulative Gain)
-    public static double calculateDCG(ArrayList<Double> relevanceScores) {
+    public static double calculateDCG(List<Double> relevanceScores) {
         double dcg = 0.0;
         int numSongs = relevanceScores.size();
 
