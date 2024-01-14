@@ -6,14 +6,13 @@ import java.util.List;
 
 /**
  * The IDCG (Ideal Discounted Cumulative Gain) Calculator Class
- *
  */
 public class IDCGCalculator {
 
     // Function to calculate IDCG (Ideal Discounted Cumulative Gain)
     public static double calculateIDCG(List<Double> relevanceScores) {
         List<Double> sortedScores = new ArrayList<>(relevanceScores);
-        Collections.sort(sortedScores, Collections.reverseOrder()); // Sort in descending order
+        sortedScores.sort(Collections.reverseOrder()); // Sort in descending order
 
         // Calculate IDCG using the same formula as DCG
         double idcg = 0.0;

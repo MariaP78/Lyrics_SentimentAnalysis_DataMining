@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,9 +21,8 @@ import static com.datamining.sentimentanalysis.PythonResponse.ResultItem;
 
 /**
  * The Song Controller Class
- * 
+ * <p>
  * creates the endpoint for the sentiment analysis of a song
- * 
  */
 @RestController
 public class SongController {
@@ -78,7 +76,7 @@ public class SongController {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(responseEntity.getBody());
         String message = jsonNode.get("message").asText();
-        List<ResultItem> result = Arrays.asList(objectMapper.readValue(jsonNode.get("result").toString(), ResultItem[].class));
+        ResultItem[] result = objectMapper.readValue(jsonNode.get("result").toString(), ResultItem[].class);
 
         List<Song> pyList = new ArrayList<>();
         for (ResultItem resultItem : result) {

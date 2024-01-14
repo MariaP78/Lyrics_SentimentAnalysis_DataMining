@@ -2,11 +2,10 @@ package com.datamining.sentimentanalysis;
 
 /**
  * The Song Class
- * 
+ * <p>
  * Used for storing the lyrics, sentiment score of a song amd its relevance score
- *
  */
-public class Song implements Comparable<Song>{
+public class Song implements Comparable<Song> {
     private String lyrics;
     private Double sentimentScore;
     private Double relevanceScore;
@@ -57,5 +56,5 @@ public class Song implements Comparable<Song>{
     public String toString() {
         return "Lyrics: " + lyrics + "\nScore: " + sentimentScore + "\nRelevanceScore: " + relevanceScore + "\n";
     }
-    
+
 }

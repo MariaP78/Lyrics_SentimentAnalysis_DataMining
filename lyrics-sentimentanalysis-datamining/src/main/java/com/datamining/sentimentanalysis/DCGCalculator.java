@@ -1,11 +1,9 @@
 package com.datamining.sentimentanalysis;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The DCG (Discounted Cumulative Gain) Calculator Class
- *
  */
 public class DCGCalculator {
 

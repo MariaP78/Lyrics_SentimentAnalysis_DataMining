@@ -2,14 +2,12 @@ package com.datamining.sentimentanalysis;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Lyrics Sentiment Analysis Data Mining Main Class
- *
  */
 public class App {
     public static void main(String[] args) {
@@ -46,7 +44,6 @@ public class App {
 
         System.out.println("\nNaive Bayes Java - Performance:");
         measurePerformance(songsJava);
-
 
 
     }
