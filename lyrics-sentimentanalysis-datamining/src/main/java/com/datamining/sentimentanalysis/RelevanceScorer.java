@@ -28,8 +28,9 @@ public class RelevanceScorer {
         final double baseLogRelevance = Math.log(rankedSongs.size());
         for (int i = 0; i < rankedSongs.size(); i++) {
             // Using logarithmic scale, we ensure that the top song has the highest score
-            double relevanceScore = baseLogRelevance - Math.log(i + 1);
-            rankedSongs.get(i).setRelevanceScore(Double.parseDouble(String.format("%.2f", relevanceScore)));
+            double relevanceScore = baseLogRelevance - Math.log(i + 1 + rankedSongs.get(i).getSentimentScore());
+            rankedSongs.get(i).setRelevanceScore(Double.parseDouble(String.valueOf(String.format("%.2f", relevanceScore))));
         }
     }
+
 }

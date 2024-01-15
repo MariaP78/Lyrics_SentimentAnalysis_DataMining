@@ -12,7 +12,7 @@ import java.nio.file.*;
 public class LyricsPreprocessing {
     public static void main(String[] args) {
         String inputFilePath = "../Lyrics_SentimentAnalysis_DataMining/Dataset_Songs_Lyrics.txt";
-        String outputFilePath = "../Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/v1/Preprocessed_Songs_Lyrics.txt"; // Replace with desired output file path
+        String outputFilePath = "../Lyrics_SentimentAnalysis_DataMining/lyrics-sentimentanalysis-datamining/src/main/java/com/datamining/sentimentanalysis/v1/Preprocessed_Songs_Lyrics.txt";
 
         try {
             preprocessLyrics(inputFilePath, outputFilePath);

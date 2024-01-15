@@ -53,7 +53,7 @@ public class App {
         Collections.sort(rankedSongsList);
 
         // assign relevance scores to the songs -- LINEAR RELEVANCE
-        //RelevanceScorer.assignRelevanceScoresLinearly(rankedSongsList);
+//        RelevanceScorer.assignRelevanceScoresLinearly(rankedSongsList);
 
         // assign relevance scores to the songs -- LOGARITHMIC RELEVANCE
         RelevanceScorer.assignLogarithmicRelevanceScores(rankedSongsList);
@@ -89,10 +89,10 @@ public class App {
         System.out.println("The NDCG value is: " + ndcg);
 
         // Check if the ranking is perfect or not
-        if (NDCGCalculator.isPerfectRanking(ndcg)) {
-            System.out.println("The ranking is perfect!");
+        if (NDCGCalculator.checkRanking(ndcg)) {
+            System.out.println("The ranking is almost perfect...");
         } else {
-            System.out.println("The ranking is not perfect...");
+            System.out.println("The ranking is perfect!");
         }
     }
 

@@ -16,11 +16,12 @@ public class NDCGCalculator {
     }
 
     // Function to check if the ranking is perfect or not
-    public static boolean isPerfectRanking(double ndcg) {
+    public static boolean checkRanking(double ndcg) {
         double epsilon = 1e-6; // used a small value to handle precision errors
 
         // Check if NDCG is close enough to 1.0
-        return Math.abs(ndcg - 1.0) < epsilon;
+        double floor = Math.floor(Math.abs(ndcg));
+        return floor < epsilon;
     }
 
 }

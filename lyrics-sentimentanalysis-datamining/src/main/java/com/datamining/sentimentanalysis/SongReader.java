@@ -60,7 +60,6 @@ public class SongReader {
                     songs.add(currentSong);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -414,7 +414,6 @@ public class NaiveBayes {
         }
 
         // class is positive by default
-        // i.e. innocent until proven guilty
         Integer determinedClass = 1;
         Map<Integer, Double> maxProbabilities = new HashMap<>();
         Double totalProbability = 0.0;

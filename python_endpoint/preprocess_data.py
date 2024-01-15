@@ -92,6 +92,4 @@ def run_model(test_data):
 
 
 if __name__ == '__main__':
-    # TODO: output in text file, creare de api endoint care sa returneze poezia + sentiment, mai las numa multinomial,
-    # TODO: la final push la proiect pe git
     pass
