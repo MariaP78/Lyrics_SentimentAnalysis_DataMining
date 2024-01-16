@@ -12,7 +12,7 @@ In this README file, you will be able to find information regarding how to compi
 Before starting the Java Main Class (App.java), make sure you have **Java** and **Maven** installed on your computer and then run _mvn clean_ and _mvn install_ to build the project.
 Run the App.java class. After this, the Sentiment Analysis will be performed, the output will be available in the LyricsSentimentAnalysis.txt file and the performance measurements with DCG, IDCG and NDCG will be computed and will appear in the console.
 
-When Measuring the performance of the algorithm from Python, before running the main App.java, you need to access the endpoint GET http://localhost:8080/python_bayes_classification. (Make sure the Spring App - SpringBootApp.java is running)
+When _Measuring the Performance of the algorithm from Python_, before running the main App.java, you need to access the endpoint GET http://localhost:8080/python_bayes_classification. (Make sure the Spring App - SpringBootApp.java is running)
 
 ## Naive Bayes Java Implementation
 
