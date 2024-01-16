@@ -23,4 +23,4 @@ Before running the main.py file, make sure you have **Python** installed on your
 
 ## Frontend
 
-Before starting the REACT Frontend locally, please run _npm install_ to install all the necessary dependencies and then _npm start_ in Terminal and make sure to be in the frontend folder (Lyrics_SentimentAnalysis_DataMining/frontend). After that, you can introduce a song in the available input field and then click the **Analyze Sentiment** button to perform the song's lyrics analysis.
+Before starting the REACT Frontend locally, make sure you have **Node** installed on your computer and then, please run _npm install_ to install all the necessary dependencies and then _npm start_ in Terminal and make sure to be in the frontend folder (Lyrics_SentimentAnalysis_DataMining/frontend). After that, you can introduce a song in the available input field and then click the **Analyze Sentiment** button to perform the song's lyrics analysis.
